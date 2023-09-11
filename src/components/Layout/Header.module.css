@@ -8,6 +8,8 @@
   align-content: center;
   position: relative;
   z-index: 10;
+  color: #226093ff;
+  font-style: italic;
 }
 .header h1 {
   margin: 0 auto;
@@ -15,11 +17,31 @@
   grid-column-end: 2;
 }
 .header button {
+  display: grid;
+  grid-template-columns: 4rem 4rem 4rem;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
   margin: auto auto;
-  width: 7rem;
-  height: 2rem;
+  height: 2.5rem;
   grid-column-start: 5;
   grid-column-end: 6;
+  border: none;
+  background-color: rgb(255, 199, 139);
+  color: #226093ff;
+  font-weight: bold;
+  font-size: 1.1rem;
+  font-style: italic;
+  transform: skewX(9deg);
+}
+.div {
+  transform: skew(-18deg)
+}
+.lastInBtn {
+  background-color:rgba(203, 115, 128, 0.7);
+  box-shadow: 5px 0px 0px 2px rgba(203, 115, 128, 0.7), -10px 0px 0px 0px rgba(203, 115, 128, 0.7) ;
+  transform: skew(-18deg);
+  border: none;
 }
 .img {
   position: absolute;
