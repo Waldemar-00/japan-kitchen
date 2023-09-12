@@ -37,9 +37,10 @@
 .div {
   transform: skew(-18deg)
 }
-.lastInBtn {
+.lastBtn {
   background-color:rgba(203, 115, 128, 0.7);
-  box-shadow: 5px 0px 0px 2px rgba(203, 115, 128, 0.7), -10px 0px 0px 0px rgba(203, 115, 128, 0.7) ;
+  box-shadow: 5px 0px 0px 2px rgba(203, 115, 128, 0.7),
+  -10px 0px 0px 0px rgba(203, 115, 128, 0.7);
   transform: skew(-18deg);
   border: none;
 }
