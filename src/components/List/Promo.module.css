@@ -1,11 +1,29 @@
 .promo {
-  margin-top: 33rem;
   color: #da8c83ff;
+  color: #226093ff;
   font-weight: bold;
   font-style: italic;
   font-size: 1.5rem;
+  position: absolute;
+  top: 21rem;
+  width: 100vw;
+  z-index: 30;
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.promo h1 {
+  margin-top: 70px
+}
+.promo section {
+  margin-top: 8rem;
 }
 .promo p {
-  color: rgb(61, 106, 138);
-  font-size: 1.3rem;
+  margin-top: -1rem;
+  color: #80252cff;
+  font-size: 1.5rem;
 }
+/* .promo p span { */
+  /* display: inline-block; */
+  /* background-color: #da8c83ff; */
+  /* transform: skewX(9deg); */
+/*    */
+/* } */

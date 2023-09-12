@@ -14,7 +14,7 @@
   grid-template-columns: repeat(3, 20vw);
   grid-auto-flow: column;
   background-color: #e5e7d8ff;
-  border-radius: 8px;
+  transform: skew(-9deg);
   height: 5rem;
   align-items: center;
   font-size: 1rem;
@@ -25,4 +25,11 @@
 .listDishes li:nth-child(2n) {
   background-color: rgb(159, 198, 230);
   color: #14481aff;
+}
+.price {
+  width: 3.3rem;
+  margin: 0 auto;
+  background-color: rgb(255, 191, 124);
+  transform: skew(-9deg);
+  border: none;
 }

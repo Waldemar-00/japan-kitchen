@@ -8,7 +8,7 @@ function Dishes() {
           return <li key={dish.id}>
             <div>{dish.name}</div>
             <div>{dish.description}</div>
-            <div>{dish.price}</div>
+            <div className={styles.price}>{dish.price}</div>
             </li>
         })
       }
