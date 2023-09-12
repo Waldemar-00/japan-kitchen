@@ -17,8 +17,12 @@
   border-radius: 8px;
   height: 5rem;
   align-items: center;
-
+  
+  color: #4b2428ff;
+  font-weight: bold;
+  font-style: italic;
 }
 .listDishes li:nth-child(2n) {
   background-color: rgb(159, 198, 230);
+  color: #14481aff;
 }
