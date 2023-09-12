@@ -1,0 +1,11 @@
+.promo {
+  margin-top: 33rem;
+  color: #da8c83ff;
+  font-weight: bold;
+  font-style: italic;
+  font-size: 1.5rem;
+}
+.promo p {
+  color: rgb(61, 106, 138);
+  font-size: 1.3rem;
+}

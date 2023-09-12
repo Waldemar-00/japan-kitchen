@@ -7,7 +7,7 @@ function Header() {
   return (
     <>
       <header className={styles.header}>
-        <h1>Japan Kitchen</h1>
+        <h2>Japan Kitchen</h2>
         <Button type='button'>
           <div className={styles.div} key={v4()}><CartIcon/></div>
           <div className={styles.div} key={v4()}>Cart</div>

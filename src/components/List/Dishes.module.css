@@ -7,7 +7,7 @@
   align-items: center;
   justify-items: center;
   grid-auto-flow: row;
-  margin-top: 30rem;
+  margin-top: 5rem;
 }
 .listDishes li {
   display: grid;
@@ -17,7 +17,7 @@
   border-radius: 8px;
   height: 5rem;
   align-items: center;
-  
+  font-size: 1rem;
   color: #4b2428ff;
   font-weight: bold;
   font-style: italic;

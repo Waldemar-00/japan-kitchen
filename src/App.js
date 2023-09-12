@@ -1,11 +1,11 @@
 import './App.css' 
 import Header from './components/Layout/Header'
-import Dishes from './components/List/Dishes'
+import Promo from './components/List/Promo'
 function App() {
   return (
     <div className="App">
       <Header />
-      <Dishes />
+      <Promo />
     </div>
   ) 
 }
