@@ -26,6 +26,15 @@
   background-color: rgb(159, 198, 230);
   color: #14481aff;
 }
+.listDishes li .form {
+  background-color: #9fc6e6ff;
+}
+.listDishes li:nth-child(2n) .form {
+  background-color: #e5e7d8ff;
+}
+.listDishes li:nth-child(2n) .form button {
+  color: #14481aff
+}
 .price {
   width: 3.3rem;
   margin: 0 auto;
