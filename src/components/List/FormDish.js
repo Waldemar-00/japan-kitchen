@@ -8,8 +8,9 @@ function FormDish({className}) {
         type='text'
         inputMode='numeric'
         pattern='\d*'
+        placeholder='dose'
       />
-      <Button className={styles.buttonDish}>in cart</Button>
+      <Button className={styles.buttonDish}>to cart</Button>
     </div>
   )
 }

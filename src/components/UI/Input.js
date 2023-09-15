@@ -7,12 +7,16 @@ export default function Input(
     id,
     className,
     inputMode,
-    pattern
+    pattern,
+    placeholder,
+    label,
+    min,
+    step
   }
 ) {
   return (
     <>
-      <label htmlFor={id}>{name}</label>
+      <label htmlFor={id}>{label}</label>
       <input type={type}
         name={name}
         disabled={disabled}
@@ -20,6 +24,9 @@ export default function Input(
         className={className}
         inputMode={inputMode}
         pattern={pattern}
+        placeholder={placeholder}
+        min={min}
+        step={step}
         />
     </>
   )
