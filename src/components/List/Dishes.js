@@ -2,8 +2,12 @@ import styles from './Dishes.module.css'
 import DataDishes from './DataDishes'
 import FormDish from './FormDish'
 import Cart from '../Cart/Cart'
+import { useContext } from 'react'
+import { Context } from '../../Context'
 function Dishes() {
   const data = DataDishes()
+  const { isVisibleCart } = useContext(Context)
+  console.log(isVisibleCart)
   return (
     <>
       <ul className={styles.listDishes}>
@@ -20,7 +24,7 @@ function Dishes() {
           })
         }
       </ul>
-      <Cart data={data}/>
+      {isVisibleCart ? <Cart data={data} /> : null}
     </>
   )
 }
