@@ -6,4 +6,15 @@
   left: 0;
   z-index: 35;
   background-color: rgb(240, 248, 255);
+  animation: appearance-slide 0.5s linear forwards;
+}
+@keyframes appearance-slide {
+  from { 
+    transform: translateY(-5rem);
+    opacity: 0;
+  }
+  to { 
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
