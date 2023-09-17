@@ -1,6 +1,11 @@
 .cart {
   margin-top: 5rem;
   margin-bottom: 5rem;
+  position: absolute;
+  width: 100vw;
+  top: 0;
+  left: 0;
+  z-index: 40;
 }
 .close {
   border: none;

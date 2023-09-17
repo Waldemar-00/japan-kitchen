@@ -7,7 +7,6 @@ function App() {
   const [isVisibleCart, setisVisibleCart] = useState(false)
   function changeVisibleCart() {
     setisVisibleCart(isVisibleCart => !isVisibleCart)
-    console.log(isVisibleCart)
   }
   return (
     <Context.Provider value={{ isVisibleCart, changeVisibleCart }}>
