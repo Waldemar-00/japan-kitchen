@@ -3,6 +3,7 @@
   height: 140%;
   position: absolute;
   top: -21rem;
-  left: 0;z-index: 35;
+  left: 0;
+  z-index: 35;
   background-color: rgb(240, 248, 255);
 }
