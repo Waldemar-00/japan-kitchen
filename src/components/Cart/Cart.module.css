@@ -2,6 +2,19 @@
   margin-top: 5rem;
   margin-bottom: 5rem;
 }
+.close {
+  border: none;
+  width: 7rem;
+  height: 2rem;
+  background-color: #4b2428ff;
+  transform: skewX(-9deg);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: rgb(240, 240, 240);
+  position: relative;
+  left: 38rem;
+  top: -4.5rem;
+}
 .cart ul {
   list-style: none;
   display: grid;

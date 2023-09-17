@@ -35,6 +35,9 @@
   font-style: italic;
   transform: skewX(9deg);
 }
+.btn {
+  cursor: pointer;
+}
 .div {
   transform: skew(-18deg)
 }

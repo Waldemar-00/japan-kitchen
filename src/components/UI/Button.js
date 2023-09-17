@@ -1,8 +1,8 @@
-export default function Button({ type, children, className, getCart }) {
+export default function Button({ type, children, className, changeVisibleCart }) {
   return (
     <button type={type}
       className={className}
-      onClick={getCart}
+      onClick={changeVisibleCart}
     >
       {children}
     </button>

@@ -2,11 +2,16 @@ import styles from './Cart.module.css'
 import { v4 } from 'uuid'
 import Button from '../UI/Button'
 import Input from '../UI/Input'
-function Cart({data}) {
+import { Context } from '../../Context'
+import { useContext } from 'react'
+function Cart({ data }) {
+  const { changeVisibleCart } = useContext(Context)
   return (
     <div className={styles.cart}>
       <h2>Your products in CART</h2>
+      <Button type='button' className={styles.close} changeVisibleCart={changeVisibleCart}>close cart</Button>
       <ul>
+        
         {
           data.map(dish => {
             return (

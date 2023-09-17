@@ -5,14 +5,14 @@ import { useState } from 'react'
 import { Context } from './Context'
 function App() {
   const [isVisibleCart, setisVisibleCart] = useState(false)
-  function getCart() {
+  function changeVisibleCart() {
     setisVisibleCart(isVisibleCart => !isVisibleCart)
     console.log(isVisibleCart)
   }
   return (
-    <Context.Provider value={{isVisibleCart}}>
+    <Context.Provider value={{ isVisibleCart, changeVisibleCart }}>
       <div className="App">
-        <Header getCart={getCart}/>
+        <Header changeVisibleCart={changeVisibleCart}/>
         <Promo />
       </div>
     </Context.Provider>
