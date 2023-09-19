@@ -1,13 +1,12 @@
 import styles from './Dishes.module.css'
-import DataDishes from './DataDishes'
+import DataDishes from '../../store/DataDishes'
 import FormDish from './FormDish'
 import Cart from '../Cart/Cart'
 import { useContext } from 'react'
-import { Context } from '../../Context'
+import { Context } from '../../store/Context'
 function Dishes() {
   const data = DataDishes()
   const { isVisibleCart } = useContext(Context)
-  console.log(isVisibleCart)
   return (
     <>
       <ul className={styles.listDishes}>

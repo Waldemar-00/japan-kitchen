@@ -2,7 +2,7 @@ import styles from './Cart.module.css'
 import { v4 } from 'uuid'
 import Button from '../UI/Button'
 import Input from '../UI/Input'
-import { Context } from '../../Context'
+import { Context } from '../../store/Context'
 import { useContext } from 'react'
 import Substrate from './Substrate'
 function Cart({ data }) {

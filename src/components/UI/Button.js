@@ -1,4 +1,7 @@
-export default function Button({ type, children, className, changeVisibleCart }) {
+import { useContext } from 'react'
+import { Context } from '../../store/Context'
+function Button({ type, children, className}) {
+  const { changeVisibleCart } = useContext(Context)
   return (
     <button type={type}
       className={className}
@@ -8,3 +11,4 @@ export default function Button({ type, children, className, changeVisibleCart })
     </button>
   )
 }
+export default Button

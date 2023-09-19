@@ -1,20 +1,15 @@
 import './App.css' 
 import Header from './components/Layout/Header'
 import Promo from './components/List/Promo'
-import { useState } from 'react'
-import { Context } from './Context'
+import   ContextProvider  from './store/ContextProvider'
 function App() {
-  const [isVisibleCart, setisVisibleCart] = useState(false)
-  function changeVisibleCart() {
-    setisVisibleCart(isVisibleCart => !isVisibleCart)
-  }
   return (
-    <Context.Provider value={{ isVisibleCart, changeVisibleCart }}>
+    <ContextProvider>
       <div className="App">
-        <Header changeVisibleCart={changeVisibleCart}/>
-        <Promo />
+        <Header/>
+        <Promo/>
       </div>
-    </Context.Provider>
+    </ContextProvider>
   ) 
 }
 
