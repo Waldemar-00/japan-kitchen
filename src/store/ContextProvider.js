@@ -1,45 +1,44 @@
 import { Context } from './Context'
 import { useState, useReducer } from 'react'
 
-const defaultCart = {
-  dishes: [{ amount: 12}],
-  totalAmount: 0,
-}
-function cartReducer(state, action) {
-  switch (action.type) {
-    case 'ADD':
-      return () => {
-        const dishes = state.dishes.concat(action.dish)
-        const amount = state.totalAmount + action.dish.price * action.dish.amount
-        return {
-          dishes: dishes,
-          totalAmount: amount
-        }
-      }
-    case 'REMOVE':
-      return
-    default: return defaultCart
-  }
-   
-}
 function ContextProvider({ children }) {
   const [isVisibleCart, setisVisibleCart] = useState(false)
-  const [lastState, cartDispatch] = useReducer(cartReducer, defaultCart)
+  const [lastState, cartDispatch] = useReducer(cartReducer, { dishes: [], totalPrice: 0, numberOfDish: 0 })
   function changeVisibleCart() {
     setisVisibleCart(isVisibleCart => !isVisibleCart)
   }
-  function addOrRemoveDish(dish, addOrRemove) {
+  function addOrRemoveDish(dish, addOrRemove, numberOfDish) {
     cartDispatch({
       type: addOrRemove,
       dish: dish,
+      number: numberOfDish
     })
   }
+  function cartReducer(state, action) {
+    switch (action.type) {
+      case 'ADD':
+        return caseAdd(state, action)
+      case 'REMOVE':
+        return
+      default: return
+    }
+  }
+  function caseAdd(state, action) {
+    return {
+      dishes: state.dishes.concat(action.dish),
+      totalPrice: state.totalPrice + action.dish.price * action.number,
+      numberOfDish: action.number
+    }
+  }
+
   return (
     <Context.Provider value={{
       isVisibleCart,
       changeVisibleCart,
+      addOrRemoveDish,
       allDish: lastState.dishes,
-      total: lastState.totalAmount,
+      total: lastState.totalPrice,
+      numberOfDish: lastState.numberOfDish
     }}>
       {children}
     </Context.Provider>

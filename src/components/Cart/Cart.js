@@ -5,17 +5,17 @@ import Input from '../UI/Input'
 import { Context } from '../../store/Context'
 import { useContext } from 'react'
 import Substrate from './Substrate'
-function Cart({ data }) {
-  const { changeVisibleCart } = useContext(Context)
+function Cart() {
+  const { changeVisibleCart, allDish, total } = useContext(Context)
   return (
     <Substrate>
       <div className={styles.cart}>
         <h2>Your products in CART</h2>
-        <Button type='button' className={styles.close} changeVisibleCart={changeVisibleCart}>close cart</Button>
+        <Button type='button' className={styles.close} foo={changeVisibleCart}>close cart</Button>
         <ul>
           
           {
-            data.map(dish => {
+            allDish.map(dish => {
               return (
               <li key={v4()}>
                   <div>{dish.name}</div>
@@ -34,15 +34,17 @@ function Cart({ data }) {
           <li key={v4()}>
             <div>Total</div>
             <div></div>
-            <div>1000</div>
+            <div>{total}</div>
           </li>
         </ul>
-        <form action="#">
+        {
+          total > 0 ? <form action="#">
           <label htmlFor="textarea">write your wishes</label>
           <textarea name="textarea" id="textarea"></textarea>
           <Button type="submit">order</Button>
-        </form>
-      </div>
+          </form> : null
+        }
+      </div> 
     </Substrate>
   )
 }

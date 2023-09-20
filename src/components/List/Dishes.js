@@ -17,13 +17,13 @@ function Dishes() {
                 <div><h3>{dish.name}</h3></div>
                 <div>{dish.description}</div>
                 <div className={styles.price}>{dish.price}</div>
-                <FormDish className={styles.form} />
+                <FormDish className={styles.form} dish={dish}/>
               </li>
             )
           })
         }
       </ul>
-      {isVisibleCart ? <Cart data={data} /> : null}
+      {isVisibleCart ? <Cart /> : null}
     </>
   )
 }
