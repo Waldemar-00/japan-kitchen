@@ -32,7 +32,7 @@
 }
 .cart li {
   display: grid;
-  grid-template-columns: repeat(3, 20vw);
+  grid-template-columns: 16vw 20vw 6vw 6vw 6vw;
   grid-auto-flow: column;
   gap: 1rem;
   background-color: #e5e7d8ff;
@@ -58,7 +58,7 @@
   color: #14481aff
 }
 .input {
-  width: 3.3rem;
+  width: 7rem;
   margin: 0 auto;
   background-color: rgb(255, 191, 124);
   transform: skew(-9deg);

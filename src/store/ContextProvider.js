@@ -24,10 +24,12 @@ function ContextProvider({ children }) {
     }
   }
   function caseAdd(state, action) {
+    action.dish.finalyPrice = state.totalPrice + action.dish.price * action.number
+    action.dish.dishNumber = action.number
     return {
       dishes: state.dishes.concat(action.dish),
       totalPrice: state.totalPrice + action.dish.price * action.number,
-      numberOfDish: action.number
+      numberOfDish: +state.numberOfDish + +action.number
     }
   }
 

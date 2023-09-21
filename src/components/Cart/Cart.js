@@ -13,7 +13,6 @@ function Cart() {
         <h2>Your products in CART</h2>
         <Button type='button' className={styles.close} foo={changeVisibleCart}>close cart</Button>
         <ul>
-          
           {
             allDish.map(dish => {
               return (
@@ -21,10 +20,12 @@ function Cart() {
                   <div>{dish.name}</div>
                   <div>{dish.description}</div>
                   <div>{dish.price}</div>
+                  <div>{dish.dishNumber} dose</div>
+                  <div>{dish.finalyPrice}</div>
                   <Input type='number'
-                    min='1'
+                    min='0'
                     step='1'
-                    label='change in'
+                    placeholder='change'
                     className={styles.input}
                   />
               </li>

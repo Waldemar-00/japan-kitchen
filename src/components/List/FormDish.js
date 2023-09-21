@@ -6,7 +6,6 @@ function FormDish({ className, dish }) {
   const [value, setValue] = useState('')
   const { addOrRemoveDish } = useContext(Context)
   function changeValue(e) {
-    console.log(e.target.value)
     setValue(e.target.value)
   }
   return (
@@ -14,10 +13,13 @@ function FormDish({ className, dish }) {
       <input className={styles.inputDish}
         type='number'
         placeholder='dose'
-        onInput={(e) => changeValue(e)}
+        min='0'
+        step='1'
+        onChange={(e) => changeValue(e)}
         value={value}
       />
       <button className={styles.buttonDish}
+        type='button'
         onClick={(e) => {
           addOrRemoveDish(dish, 'ADD', value)
         }}

@@ -1,4 +1,4 @@
-function Button({ type, children, className, foo, dish }) {
+function Button({ type, children, className, foo }) {
   return (
     <button type={type}
       className={className}
