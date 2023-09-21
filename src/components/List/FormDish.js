@@ -20,7 +20,7 @@ function FormDish({ className, dish }) {
       />
       <button className={styles.buttonDish}
         type='button'
-        onClick={(e) => {
+        onClick={() => {
           addOrRemoveDish(dish, 'ADD', value)
         }}
       >
