@@ -19,8 +19,10 @@ function FormDish({ className, dish }) {
         value={value}
       />
       <button className={styles.buttonDish}
-        type='button'
-        onClick={() => {
+        
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation()
           addOrRemoveDish(dish, 'ADD', value)
         }}
       >

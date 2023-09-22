@@ -24,7 +24,7 @@ function ContextProvider({ children }) {
     }
   }
   function caseAdd(state, action) {
-    action.dish.finalyPrice = state.totalPrice + action.dish.price * action.number
+    action.dish.finalyPrice = action.dish.price * action.number
     action.dish.dishNumber = action.number
     return {
       dishes: state.dishes.concat(action.dish),
