@@ -1,33 +1,33 @@
 import styles from './FormDish.module.css'
 import { useContext, useState } from 'react'
 import { Context } from '../../store/Context'
+import Button from '../UI/Button'
+import Input from '../UI/Input'
 
-function FormDish({ className, dish }) {
+const FormDish = ({ className, dish }) => {
   const [value, setValue] = useState('')
   const { addOrRemoveDish } = useContext(Context)
   function changeValue(e) {
-    setValue(e.target.value)
+    setValue( e.target.value )
   }
   return (
     <div className={className}>
-      <input className={styles.inputDish}
+      <Input className={styles.inputDish}
         type='number'
         placeholder='dose'
         min='0'
         step='1'
-        onChange={(e) => changeValue(e)}
+        foo={(e) => changeValue(e)}
         value={value}
       />
-      <button className={styles.buttonDish}
-        
-        onClick={(e) => {
-          e.preventDefault();
-          e.stopPropagation()
+      <Button className={styles.buttonDish}
+        type='button'
+        foo={() => {
           addOrRemoveDish(dish, 'ADD', value)
         }}
       >
         to cart
-      </button>
+      </Button>
     </div>
   )
 }

@@ -10,7 +10,9 @@ export default function Input(
     placeholder,
     label,
     min,
-    step
+    step, 
+    foo, 
+    value,
   }
 ) {
   return (
@@ -26,6 +28,8 @@ export default function Input(
         placeholder={placeholder}
         min={min}
         step={step}
+        onInput={foo}
+        value={value}
         />
     </>
   )
