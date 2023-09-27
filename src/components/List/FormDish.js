@@ -7,6 +7,7 @@ import Input from '../UI/Input'
 const FormDish = ({ className, dish }) => {
   const [value, setValue] = useState(localStorage.getItem(dish.id))
   const { addOrRemoveDish } = useContext(Context)
+  const [placeholder, setPlaceholder] = useState('dose')
   useEffect(() => {
     localStorage.setItem(dish.id, value)
     const item = localStorage.getItem(dish.id)
@@ -21,7 +22,7 @@ const FormDish = ({ className, dish }) => {
     <div className={className}>
       <Input className={styles.inputDish}
         type='number'
-        placeholder='dose'
+        placeholder={placeholder}
         min='0'
         step='1'
         foo={(e) => changeValue(e)}
@@ -34,6 +35,7 @@ const FormDish = ({ className, dish }) => {
           const item = localStorage.getItem(dish.id)
           if (item) {
             setValue('')
+            setPlaceholder('okey')
           }
         }}
       >

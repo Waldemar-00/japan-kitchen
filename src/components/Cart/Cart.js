@@ -7,6 +7,19 @@ import { useContext } from 'react'
 import Substrate from './Substrate'
 function Cart() {
   const { changeVisibleCart, allDish, total } = useContext(Context)
+  // let newDishes = [allDish]
+  console.log(Object.keys(allDish[0]))
+  for (let i = 0; i < allDish.length; i++) {
+    for (let j = 1; j < allDish.length; j++) {
+      if (allDish[i].id !== allDish[j].id) continue 
+      else {
+        // newDishes[i].finalyPrice = (+allDish[i].price + +allDish[j].finalyPrice)
+        // newDishes[i].dishNumber = (+allDish[i].dishNumber + +allDish[j].dishNumber)
+        // console.log(Object.keys(newDishes))
+
+      }
+    }
+  }
   return (
     <Substrate>
       <div className={styles.cart}>
@@ -39,7 +52,8 @@ function Cart() {
           </li>
         </ul>
         {
-          total > 0 ? <form action="#">
+          total > 0 ?
+          <form action="#">
           <label htmlFor="textarea">write your wishes</label>
           <textarea name="textarea" id="textarea"></textarea>
           <Button type="submit">order</Button>
