@@ -11,8 +11,7 @@ function cartReducer(state, action) {
   }
 }
 function caseAdd(state, action) {
-  action.dish.finalyPrice = state.totalPrice + action.dish.price *
-    action.number
+  action.dish.finalyPrice = (action.dish.price * action.number).toFixed(2)
   action.dish.dishNumber = action.number
   return {
     dishes: state.dishes.concat(action.dish),
@@ -41,7 +40,7 @@ function ContextProvider({ children }) {
       changeVisibleCart,
       addOrRemoveDish,
       allDish: lastState.dishes,
-      total: lastState.totalPrice,
+      total: lastState.totalPrice.toFixed(2),
       numberOfDish: lastState.numberOfDish
     }}>
       {children}

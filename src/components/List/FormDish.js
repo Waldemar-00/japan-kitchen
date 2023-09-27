@@ -8,7 +8,6 @@ const FormDish = ({ className, dish }) => {
   const [value, setValue] = useState(localStorage.getItem(dish.id))
   const { addOrRemoveDish } = useContext(Context)
   useEffect(() => {
-    console.log(dish.id)
     localStorage.setItem(dish.id, value)
     const item = localStorage.getItem(dish.id)
     if (item) {
