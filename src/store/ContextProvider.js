@@ -11,15 +11,28 @@ function cartReducer(state, action) {
   }
 }
 function caseAdd(state, action) {
+  let newState = []
+  let titulNumber = 0
+  let allPriceOfDish = 0
+  let allDishes = []
+  if (state.dishes.length > 0) {
+    newState = state.dishes.filter(dish => {
+      return dish.id !== action.dish.id
+    })
+  }
   action.dish.finalyPrice = (action.dish.price * action.number).toFixed(2)
   action.dish.dishNumber = action.number
+  allDishes = newState.concat(action.dish)
+  allDishes.forEach(dish => {
+    allPriceOfDish += dish.price * dish.dishNumber
+    titulNumber += +dish.dishNumber
+  })
   return {
-    dishes: state.dishes.concat(action.dish),
-    totalPrice: state.totalPrice + action.dish.price * action.number,
-    numberOfDish: +state.numberOfDish + +action.number
+    dishes: allDishes,
+    totalPrice: allPriceOfDish,
+    numberOfDish: titulNumber
   }
 }
-
 function ContextProvider({ children }) {
   const [isVisibleCart, setisVisibleCart] = useState(false)
   const [lastState, cartDispatch] = useReducer(cartReducer, { dishes: [], totalPrice: 0, numberOfDish: 0 })
