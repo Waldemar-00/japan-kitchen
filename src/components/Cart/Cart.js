@@ -1,7 +1,6 @@
 import styles from './Cart.module.css'
 import { v4 } from 'uuid'
 import Button from '../UI/Button'
-import Input from '../UI/Input'
 import { Context } from '../../store/Context'
 import { useContext } from 'react'
 import Substrate from './Substrate'
@@ -22,12 +21,12 @@ function Cart() {
                   <div>{dish.price}</div>
                   <div>{dish.dishNumber} dose</div>
                   <div>{dish.finalyPrice}</div>
-                  <Input type='number'
-                    min='0'
-                    step='1'
-                    placeholder='change'
-                    className={styles.input}
-                  />
+                  <Button
+                    className={styles.btn}
+                  >+</Button>
+                  <Button
+                    className={styles.btn}
+                  >-</Button>
               </li>
               )
             })
