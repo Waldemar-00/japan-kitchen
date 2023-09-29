@@ -2,10 +2,16 @@ import styles from './Cart.module.css'
 import { v4 } from 'uuid'
 import Button from '../UI/Button'
 import { Context } from '../../store/Context'
-import { useContext } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Substrate from './Substrate'
 function Cart() {
   const { changeVisibleCart, allDish, total } = useContext(Context)
+  useEffect(() => {
+    
+  }, [])
+  function changeLocalStorageValues(e) {
+    localStorage.setItem(e.target.name, e.target.value)
+  }
   return (
     <Substrate>
       <div className={styles.cart}>
@@ -14,25 +20,33 @@ function Cart() {
         <ul>
           {
             allDish.map(dish => {
+              localStorage.setItem(`${dish.id} value`, dish.dishNumber)
+              let num = dish.dishNumber
+              if (localStorage.getItem(`${dish.id} value`)) {
+                num = localStorage.getItem(`${dish.id} value`)
+              }
+              console.log(num)
               return (
               <li key={v4()}>
                   <div>{dish.name}</div>
                   <div>{dish.description}</div>
                   <div>{dish.price}</div>
-                  <div>{dish.dishNumber} dose</div>
-                  <div>{dish.finalyPrice}</div>
-                  <Button
-                    className={styles.btn}
-                  >+</Button>
-                  <Button
-                    className={styles.btn}
-                  >-</Button>
+                  <input className={styles.input}
+                    type='number'
+                    name={`${dish.id} value`}
+                    min='1'
+                    step='1'
+                    placeholder={num}
+                    onChange={(e) => changeLocalStorageValues(e)}
+                  />
+                  <div className={styles.finalyPrice}>{dish.finalyPrice}</div>
               </li>
               )
             })
           }
           <li key={v4()}>
             <div>Total</div>
+            <div></div>
             <div></div>
             <div>{total}</div>
           </li>

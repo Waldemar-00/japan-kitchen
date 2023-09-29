@@ -57,7 +57,7 @@
 .cart li:nth-child(2n) .form button {
   color: #14481aff
 }
-.btn {
+.input {
   width: 4rem;
   margin: 0 auto;
   background-color: rgb(255, 191, 124);
@@ -65,19 +65,13 @@
   border: none;
   cursor: pointer;
   outline: none;
-  /* margin: 1rem; */
-  /* margin-right: 1rem;  */
+  margin: 1rem;
+  margin-right: 1rem; 
   font-style: italic;
   font-size: 1.1rem;
   font-weight: bold;
   color: #14481aff;
   text-align: center;
-}
-.btn:hover {
-  border: 4px solid rgb(255, 191, 124);
-}
-.btn:last-child {
-  margin-right: 2.7rem
 }
 
 .cart form {
@@ -121,4 +115,8 @@
   background-color:  #14481aff;
   color: rgb(255, 191, 124);
   transition: all 0.5s linear;
+}
+.finalyPrice {
+  margin-right: 2rem;
+  margin-left: 2rem
 }
