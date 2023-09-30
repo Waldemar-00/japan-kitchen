@@ -36,6 +36,7 @@ const FormDish = ({ className, dish }) => {
           if (item) {
             setValue('')
             setPlaceholder('okey')
+            localStorage.removeItem(`${dish.id} value`)
           }
         }}
       >

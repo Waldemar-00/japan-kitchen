@@ -2,13 +2,10 @@ import styles from './Cart.module.css'
 import { v4 } from 'uuid'
 import Button from '../UI/Button'
 import { Context } from '../../store/Context'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import Substrate from './Substrate'
 function Cart() {
   const { changeVisibleCart, allDish, total } = useContext(Context)
-  useEffect(() => {
-    
-  }, [])
   function changeLocalStorageValues(e) {
     localStorage.setItem(e.target.name, e.target.value)
   }
@@ -20,12 +17,8 @@ function Cart() {
         <ul>
           {
             allDish.map(dish => {
-              localStorage.setItem(`${dish.id} value`, dish.dishNumber)
-              let num = dish.dishNumber
-              if (localStorage.getItem(`${dish.id} value`)) {
-                num = localStorage.getItem(`${dish.id} value`)
-              }
-              console.log(num)
+              if (!localStorage.getItem(`${dish.id} value`))localStorage.setItem(`${dish.id} value`, dish.dishNumber)
+              let num = localStorage.getItem(`${dish.id} value`) || dish.dishNumber
               return (
               <li key={v4()}>
                   <div>{dish.name}</div>
