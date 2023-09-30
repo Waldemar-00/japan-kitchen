@@ -9,6 +9,7 @@ function Cart() {
   function changeLocalStorageValues(e) {
     localStorage.setItem(e.target.name, e.target.value)
   }
+  if (allDish.length > 0) localStorage.setItem('allDish', JSON.stringify(allDish))
   return (
     <Substrate>
       <div className={styles.cart}>
@@ -16,7 +17,7 @@ function Cart() {
         <Button type='button' className={styles.close} foo={changeVisibleCart}>close cart</Button>
         <ul>
           {
-            allDish.map(dish => {
+            JSON.parse(localStorage.getItem('allDish')).map(dish => {
               if (!localStorage.getItem(`${dish.id} value`))localStorage.setItem(`${dish.id} value`, dish.dishNumber)
               let num = localStorage.getItem(`${dish.id} value`) || dish.dishNumber
               return (
