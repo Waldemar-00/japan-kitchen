@@ -25,8 +25,15 @@ function caseAdd(state, action) {
   allDishes = newState.concat(action.dish)
   allDishes.forEach(dish => {
     allPriceOfDish += dish.price * dish.dishNumber
-    titulNumber += +dish.dishNumber
+    let getDish = localStorage.getItem(`${dish.id}`)
+    let getDishValue = localStorage.getItem(`${dish.id} value`)
+    titulNumber =
+      getDish ? +getDish + titulNumber :
+      getDishValue ? +getDishValue + titulNumber :
+      titulNumber + +dish.dishNumber
+    localStorage.setItem('numDish', titulNumber)
   })
+  console.log(titulNumber)
   return {
     dishes: allDishes,
     totalPrice: allPriceOfDish,
@@ -54,7 +61,7 @@ function ContextProvider({ children }) {
       addOrRemoveDish,
       allDish: lastState.dishes,
       total: lastState.totalPrice.toFixed(2),
-      numberOfDish: lastState.numberOfDish
+      numberOfDish: lastState.numberOfDish,
     }}>
       {children}
     </Context.Provider>

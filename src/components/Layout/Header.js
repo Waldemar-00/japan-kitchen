@@ -14,7 +14,8 @@ function Header() {
         <Button type='button' className={styles.btn} foo={changeVisibleCart}>
           <div className={styles.div} key={v4()}><CartIcon/></div>
           <div className={styles.div} key={v4()}>Cart</div>
-          <div className={styles.lastBtn} key={v4()}>{numberOfDish}</div>
+          <div className={styles.lastBtn} key={v4()}>{
+            localStorage.getItem('numDish') || 0}</div>
         </Button>
       </header>
       <div className={styles.img}>
