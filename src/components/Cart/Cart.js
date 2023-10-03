@@ -2,10 +2,11 @@ import styles from './Cart.module.css'
 import { v4 } from 'uuid'
 import Button from '../UI/Button'
 import { Context } from '../../store/Context'
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import Substrate from './Substrate'
 function Cart() {
   const { changeVisibleCart, allDish, total } = useContext(Context)
+  const [reset, setReset] = useState(false)
   let allNumDish = localStorage.getItem('numDish')
   function changeLocalStorageValues(e) {
     const prevValue = localStorage.getItem(e.target.name)
@@ -19,6 +20,12 @@ function Cart() {
     localStorage.setItem('numDish', allNumDish)
   }
   if (allDish.length > 0) localStorage.setItem('allDish', JSON.stringify(allDish))
+  function resetCart(e) {
+    e.preventDefault()
+    localStorage.clear()
+    setReset(true)
+    localStorage.setItem('allDish', [])
+  }
   return (
     <Substrate>
       <div className={styles.cart}>
@@ -26,7 +33,7 @@ function Cart() {
         <Button type='button' className={styles.close} foo={changeVisibleCart}>close cart</Button>
         <ul>
           {
-            JSON.parse(localStorage.getItem('allDish')) ?
+            !reset && JSON.parse(localStorage.getItem('allDish')) ?
             JSON.parse(localStorage.getItem('allDish')).map(dish => {
               if (!localStorage.getItem(`${dish.id} value`))localStorage.setItem(`${dish.id} value`, dish.dishNumber)
               let num = localStorage.getItem(`${dish.id} value`) || dish.dishNumber
@@ -52,18 +59,19 @@ function Cart() {
             <div>Total</div>
             <div></div>
             <div></div>
-            <div>{total}</div>
+            <div>{!reset ? total : '0.00'}</div>
           </li>
         </ul>
         {
-          total > 0 ?
+          !reset && total > 0 ?
           <form action="#">
           <label htmlFor="textarea">write your wishes</label>
           <textarea name="textarea" id="textarea"></textarea>
           <Button type="submit">order</Button>
           </form> : null
         }
-        <Button type='button' className={styles.reset} foo={changeVisibleCart}>reset cart</Button>
+        <Button
+          type='button' className={styles.reset} foo={(e) => resetCart(e)}>reset cart</Button>
       </div> 
     </Substrate>
   )

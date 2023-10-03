@@ -2,7 +2,7 @@ function Button({ type, children, className, foo }) {
   return (
     <button type={type}
       className={className}
-      onClick={foo}
+      onClick={(e) => foo(e)}
     >
       {children}
     </button>
