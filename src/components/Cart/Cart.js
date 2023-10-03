@@ -2,28 +2,23 @@ import styles from './Cart.module.css'
 import { v4 } from 'uuid'
 import Button from '../UI/Button'
 import { Context } from '../../store/Context'
-import { useContext, useEffect, useState } from 'react'
+import { useContext } from 'react'
 import Substrate from './Substrate'
 function Cart() {
   const { changeVisibleCart, allDish, total } = useContext(Context)
-  // const [allNumDish, setAllNumDish] = useState(localStorage.getItem('numDish'))
-  // useEffect(() => {
-    // localStorage.setItem('numDish', allNumDish)
-    // if (localStorage.getItem(`${e.target.name} value`) > localStorage.getItem(e.target.name)) {
-      // setAllNumDish(allNumDish => +allNumDish - 1)
-      // localStorage.setItem('numDish', allNumDish)
-    // } else {
-      // setAllNumDish(allNumDish => +allNumDish + 1)
-      // localStorage.setItem('numDish', allNumDish)
-    // }
-  // }, [allNumDish])
+  let allNumDish = localStorage.getItem('numDish')
   function changeLocalStorageValues(e) {
+    const prevValue = localStorage.getItem(e.target.name)
     localStorage.setItem(e.target.name, e.target.value)
-    console.log(e.target.placeholder)
+    const nextValue = localStorage.getItem(e.target.name)
+    if (prevValue < nextValue) {
+      allNumDish = +allNumDish + 1
+    } else if (prevValue > nextValue) {
+      allNumDish = allNumDish - (prevValue - nextValue)
+    }
+    localStorage.setItem('numDish', allNumDish)
   }
-  //! fix Bog HERE!!!!!!!!!!!
   if (allDish.length > 0) localStorage.setItem('allDish', JSON.stringify(allDish))
-  //! fix Bog HERE!!!!!!!!!!!
   return (
     <Substrate>
       <div className={styles.cart}>

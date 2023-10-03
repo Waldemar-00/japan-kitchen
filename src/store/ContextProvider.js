@@ -33,7 +33,6 @@ function caseAdd(state, action) {
       titulNumber + +dish.dishNumber
     localStorage.setItem('numDish', titulNumber)
   })
-  console.log(titulNumber)
   return {
     dishes: allDishes,
     totalPrice: allPriceOfDish,
