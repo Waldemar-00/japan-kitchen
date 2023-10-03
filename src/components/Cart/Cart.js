@@ -13,7 +13,7 @@ function Cart() {
     const nextValue = localStorage.getItem(e.target.name)
     if (prevValue < nextValue) {
       allNumDish = +allNumDish + 1
-    } else if (prevValue > nextValue) {
+    } else if (prevValue >= nextValue) {
       allNumDish = allNumDish - (prevValue - nextValue)
     }
     localStorage.setItem('numDish', allNumDish)
@@ -63,6 +63,7 @@ function Cart() {
           <Button type="submit">order</Button>
           </form> : null
         }
+        <Button type='button' className={styles.reset} foo={changeVisibleCart}>reset cart</Button>
       </div> 
     </Substrate>
   )
