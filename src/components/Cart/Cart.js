@@ -12,9 +12,9 @@ function Cart() {
     const prevValue = localStorage.getItem(e.target.name)
     localStorage.setItem(e.target.name, e.target.value)
     const nextValue = localStorage.getItem(e.target.name)
-    if (prevValue <= nextValue) {
+    if (+prevValue < +nextValue) {
       allNumDish = +allNumDish + 1
-    } else if (prevValue >= nextValue) {
+    } else if (+prevValue >= +nextValue) {
       allNumDish = allNumDish - (prevValue - nextValue)
     }
     localStorage.setItem('numDish', allNumDish)
