@@ -46,7 +46,6 @@ function Cart() {
                     type='number'
                     name={`${dish.id} value`}
                     min='1'
-                    // step='1'
                     placeholder={num}
                     onChange={(e) => changeLocalStorageValues(e)}
                   />

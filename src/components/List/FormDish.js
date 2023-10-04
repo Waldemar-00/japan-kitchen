@@ -15,13 +15,13 @@ const FormDish = ({ className, dish }) => {
     if (item) {
       setValue(item)
     }
-    if (placeholder === 'okey') {
+    if (placeholder === 'okey' || placeholder === 'dose') {
       setDisabled(true)
     }
   }, [value, dish.id, placeholder])
   function changeValue(e) {
     setValue(e.target.value)
-    setPlaceholder('dose')
+    setPlaceholder('')
     setDisabled(false)
   }
   return (
