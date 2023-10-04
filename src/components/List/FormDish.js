@@ -6,6 +6,7 @@ import Input from '../UI/Input'
 
 const FormDish = ({ className, dish }) => {
   const [value, setValue] = useState(localStorage.getItem(dish.id))
+  const [disabled, setDisabled] = useState(false)
   const { addOrRemoveDish } = useContext(Context)
   const [placeholder, setPlaceholder] = useState('dose')
   useEffect(() => {
@@ -14,9 +15,14 @@ const FormDish = ({ className, dish }) => {
     if (item) {
       setValue(item)
     }
-  }, [value, dish.id])
+    if (placeholder === 'okey') {
+      setDisabled(true)
+    }
+  }, [value, dish.id, placeholder])
   function changeValue(e) {
     setValue(e.target.value)
+    setPlaceholder('dose')
+    setDisabled(false)
   }
   return (
     <div className={className}>
@@ -30,6 +36,7 @@ const FormDish = ({ className, dish }) => {
       />
       <Button className={styles.buttonDish}
         type='button'
+        disabled={disabled}
         foo={() => {
           addOrRemoveDish(dish, 'ADD', value)
           const item = localStorage.getItem(dish.id)
