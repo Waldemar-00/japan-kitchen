@@ -7,6 +7,8 @@ function cartReducer(state, action) {
       return caseAdd(state, action)
     case 'REMOVE':
       return
+    case 'RESET':
+      return cartReset()
     default: return
   }
 }
@@ -33,10 +35,17 @@ function caseAdd(state, action) {
       titulNumber + +dish.dishNumber
     localStorage.setItem('numDish', titulNumber)
   })
-  return {
+  return { 
     dishes: allDishes,
     totalPrice: allPriceOfDish,
     numberOfDish: titulNumber
+  }
+}
+function cartReset() {
+  return {
+    dishes: [],
+    totalPrice: 0,
+    numberOfDish: 0
   }
 }
 function ContextProvider({ children }) {
@@ -52,7 +61,15 @@ function ContextProvider({ children }) {
       number: numberOfDish
     })
   }
-
+  function resetAll(dish, addOrRemove, numberOfDish) {
+    cartDispatch(
+      {
+        type: addOrRemove,
+        dish: dish,
+        number: numberOfDish
+      }
+    )
+  }
   return (
     <Context.Provider value={{
       isVisibleCart,
@@ -61,6 +78,7 @@ function ContextProvider({ children }) {
       allDish: lastState.dishes,
       total: lastState.totalPrice.toFixed(2),
       numberOfDish: lastState.numberOfDish,
+      resetAll
     }}>
       {children}
     </Context.Provider>

@@ -5,14 +5,14 @@ import { Context } from '../../store/Context'
 import { useContext, useState } from 'react'
 import Substrate from './Substrate'
 function Cart() {
-  const { changeVisibleCart, allDish, total } = useContext(Context)
+  const { changeVisibleCart, allDish, total, resetAll } = useContext(Context)
   const [reset, setReset] = useState(false)
   let allNumDish = localStorage.getItem('numDish')
   function changeLocalStorageValues(e) {
     const prevValue = localStorage.getItem(e.target.name)
     localStorage.setItem(e.target.name, e.target.value)
     const nextValue = localStorage.getItem(e.target.name)
-    if (prevValue < nextValue) {
+    if (prevValue <= nextValue) {
       allNumDish = +allNumDish + 1
     } else if (prevValue >= nextValue) {
       allNumDish = allNumDish - (prevValue - nextValue)
@@ -24,7 +24,7 @@ function Cart() {
     e.preventDefault()
     localStorage.clear()
     setReset(true)
-    localStorage.setItem('allDish', [])
+    resetAll({}, 'RESET', 0)
   }
   return (
     <Substrate>
@@ -46,7 +46,7 @@ function Cart() {
                     type='number'
                     name={`${dish.id} value`}
                     min='1'
-                    step='1'
+                    // step='1'
                     placeholder={num}
                     onChange={(e) => changeLocalStorageValues(e)}
                   />
