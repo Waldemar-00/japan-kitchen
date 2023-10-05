@@ -1,13 +1,18 @@
 import styles from './Cart.module.css'
 import { v4 } from 'uuid'
 import Button from '../UI/Button'
+import Input from '../UI/Input'
 import { Context } from '../../store/Context'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import Substrate from './Substrate'
 function Cart() {
-  const { changeVisibleCart, allDish, total, resetAll } = useContext(Context)
+  const { changeVisibleCart, allDish, resetAll } = useContext(Context)
   const [reset, setReset] = useState(false)
+  let totalPrice = 0
   let allNumDish = localStorage.getItem('numDish')
+  //! useEffect(() => {
+    //! 
+  //! }, [])
   function changeLocalStorageValues(e) {
     const prevValue = localStorage.getItem(e.target.name)
     localStorage.setItem(e.target.name, e.target.value)
@@ -37,19 +42,22 @@ function Cart() {
             JSON.parse(localStorage.getItem('allDish')).map(dish => {
               if (!localStorage.getItem(`${dish.id} value`))localStorage.setItem(`${dish.id} value`, dish.dishNumber)
               let num = localStorage.getItem(`${dish.id} value`) || dish.dishNumber
+              totalPrice = +totalPrice + dish.price * localStorage.getItem(`${dish.id} value`)
               return (
-              <li key={v4()}>
+                <li key={v4()}>
                   <div>{dish.name}</div>
                   <div>{dish.description}</div>
                   <div>{dish.price}</div>
-                  <input className={styles.input}
+                  <Input className={styles.input}
                     type='number'
                     name={`${dish.id} value`}
                     min='1'
+                    step='1'
+                    max='20'
                     placeholder={num}
-                    onChange={(e) => changeLocalStorageValues(e)}
+                    foo={(e) => changeLocalStorageValues(e)}
                   />
-                  <div className={styles.finalyPrice}>{dish.finalyPrice}</div>
+                  <div className={styles.finalyPrice}>{(dish.price * localStorage.getItem(`${dish.id} value`)).toFixed(2)}</div>
               </li>
               )
             }) : null
@@ -58,11 +66,11 @@ function Cart() {
             <div>Total</div>
             <div></div>
             <div></div>
-            <div>{!reset ? total : '0.00'}</div>
+            <div>{!reset ? totalPrice.toFixed(2) : '0.00'}</div>
           </li>
         </ul>
         {
-          !reset && total > 0 ?
+          !reset && totalPrice > 0 ?
           <form action="#">
           <label htmlFor="textarea">write your wishes</label>
           <textarea name="textarea" id="textarea"></textarea>

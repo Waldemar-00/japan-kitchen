@@ -13,6 +13,7 @@ export default function Input(
     step, 
     foo, 
     value,
+    max
   }
 ) {
   return (
@@ -28,8 +29,9 @@ export default function Input(
         placeholder={placeholder}
         min={min}
         step={step}
-        onInput={foo}
+        onChange={foo}
         value={value}
+        max={max}
         />
     </>
   )
