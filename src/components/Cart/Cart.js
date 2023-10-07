@@ -3,16 +3,14 @@ import { v4 } from 'uuid'
 import Button from '../UI/Button'
 import Input from '../UI/Input'
 import { Context } from '../../store/Context'
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import Substrate from './Substrate'
 function Cart() {
   const { changeVisibleCart, allDish, resetAll } = useContext(Context)
   const [reset, setReset] = useState(false)
+  const [reFresh, setreFresh] = useState({})
   let totalPrice = 0
   let allNumDish = localStorage.getItem('numDish')
-  //! useEffect(() => {
-    //! 
-  //! }, [])
   function changeLocalStorageValues(e) {
     const prevValue = localStorage.getItem(e.target.name)
     localStorage.setItem(e.target.name, e.target.value)
@@ -23,13 +21,14 @@ function Cart() {
       allNumDish = allNumDish - (prevValue - nextValue)
     }
     localStorage.setItem('numDish', allNumDish)
+    setreFresh({})
   }
   if (allDish.length > 0) localStorage.setItem('allDish', JSON.stringify(allDish))
   function resetCart(e) {
     e.preventDefault()
     localStorage.clear()
     setReset(true)
-    resetAll({}, 'RESET', 0)
+    resetAll(reFresh, 'RESET', 0)
   }
   return (
     <Substrate>
@@ -44,7 +43,7 @@ function Cart() {
               let num = localStorage.getItem(`${dish.id} value`) || dish.dishNumber
               totalPrice = +totalPrice + dish.price * localStorage.getItem(`${dish.id} value`)
               return (
-                <li key={v4()}>
+                <li key={dish.name}>
                   <div>{dish.name}</div>
                   <div>{dish.description}</div>
                   <div>{dish.price}</div>
@@ -57,7 +56,7 @@ function Cart() {
                     placeholder={num}
                     foo={(e) => changeLocalStorageValues(e)}
                   />
-                  <div className={styles.finalyPrice}>{(dish.price * localStorage.getItem(`${dish.id} value`)).toFixed(2)}</div>
+                  <div className={styles.finalyPrice}>{(dish.price * num).toFixed(2)}</div>
               </li>
               )
             }) : null
