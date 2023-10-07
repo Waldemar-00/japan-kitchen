@@ -7,6 +7,7 @@ import { useContext, useState } from 'react'
 import Substrate from './Substrate'
 function Cart() {
   const { changeVisibleCart, allDish, resetAll } = useContext(Context)
+  const dataDish = [...allDish]
   const [reset, setReset] = useState(false)
   const [reFresh, setreFresh] = useState({})
   let totalPrice = 0
@@ -20,6 +21,8 @@ function Cart() {
     } else if (+prevValue >= +nextValue) {
       allNumDish = allNumDish - (prevValue - nextValue)
     }
+    let finalyPrice = e.target.price * `${e.target.name} value`
+    localStorage.setItem(`${e.target.name} finalyPrice`, finalyPrice)
     localStorage.setItem('numDish', allNumDish)
     setreFresh({})
   }
@@ -29,6 +32,18 @@ function Cart() {
     localStorage.clear()
     setReset(true)
     resetAll(reFresh, 'RESET', 0)
+  }
+  function dataSubmit(e) {
+    e.preventDefault()
+    let textarea = document.querySelector('textarea').value
+    const finData = dataDish.map((dish) => {
+      dish.dishNumber = localStorage.getItem(`${dish.name} value`)
+      dish.finalyPrice = localStorage.getItem(`${dish.name} finalyPrice`)
+      return  dish
+    })
+    finData.totalPrice = totalPrice
+    finData.textarea = textarea
+    console.log(finData)
   }
   return (
     <Substrate>
@@ -42,6 +57,8 @@ function Cart() {
               if (!localStorage.getItem(`${dish.id} value`))localStorage.setItem(`${dish.id} value`, dish.dishNumber)
               let num = localStorage.getItem(`${dish.id} value`) || dish.dishNumber
               totalPrice = +totalPrice + dish.price * localStorage.getItem(`${dish.id} value`)
+              let finalyPrice = (dish.price * num).toFixed(2)
+              localStorage.setItem(`${dish.name} finalyPrice`, finalyPrice)
               return (
                 <li key={dish.name}>
                   <div>{dish.name}</div>
@@ -56,7 +73,7 @@ function Cart() {
                     placeholder={num}
                     foo={(e) => changeLocalStorageValues(e)}
                   />
-                  <div className={styles.finalyPrice}>{(dish.price * num).toFixed(2)}</div>
+                  <div className={styles.finalyPrice}>{ finalyPrice }</div>
               </li>
               )
             }) : null
@@ -70,10 +87,12 @@ function Cart() {
         </ul>
         {
           !reset && totalPrice > 0 ?
-          <form action="#">
+          <form action='https://jsonplaceholder.typicode.com/posts' target= '_blank' method='post' >
           <label htmlFor="textarea">write your wishes</label>
           <textarea name="textarea" id="textarea"></textarea>
-          <Button type="submit">order</Button>
+              <Button type="submit"
+                foo={(e) => dataSubmit(e)}
+              >order</Button>
           </form> : null
         }
         <Button

@@ -1,4 +1,4 @@
-function Button({ type, children, className, foo, disabled }) {
+function Button({ type, children, className, foo = () => {}, disabled }) {
   return (
     <button type={type}
       className={className}
