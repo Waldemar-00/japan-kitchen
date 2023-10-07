@@ -39,11 +39,18 @@ function Cart() {
     const finData = dataDish.map((dish) => {
       dish.dishNumber = localStorage.getItem(`${dish.name} value`)
       dish.finalyPrice = localStorage.getItem(`${dish.name} finalyPrice`)
+      delete dish.description
+      delete dish.id
       return  dish
     })
-    finData.totalPrice = totalPrice
-    finData.textarea = textarea
+    finData.push({ totalPrice: totalPrice, textarea: textarea })
     console.log(finData)
+    fetch('https://jsonplaceholder.typicode.com/posts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json;charset=utf-8' },
+      body: JSON.stringify(finData)
+    }).then(response => response.json()).then(response => console.log(response))
+
   }
   return (
     <Substrate>
