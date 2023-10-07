@@ -7,7 +7,7 @@ import { useContext, useState } from 'react'
 import Substrate from './Substrate'
 function Cart() {
   const { changeVisibleCart, allDish, resetAll } = useContext(Context)
-  const dataDish = [...allDish]
+  const dataDish = allDish.length > 0 ? [...allDish] : (JSON.parse(localStorage.getItem('allDish')) || [])
   const [reset, setReset] = useState(false)
   const [reFresh, setreFresh] = useState({})
   let totalPrice = 0
@@ -26,7 +26,7 @@ function Cart() {
     localStorage.setItem('numDish', allNumDish)
     setreFresh({})
   }
-  if (allDish.length > 0) localStorage.setItem('allDish', JSON.stringify(allDish))
+  if (dataDish.length > 0) localStorage.setItem('allDish', JSON.stringify(dataDish))
   function resetCart(e) {
     e.preventDefault()
     localStorage.clear()
@@ -49,7 +49,10 @@ function Cart() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify(finData)
-    }).then(response => response.json()).then(response => console.log(response))
+    }).then(response => response.json()).then(response => {
+      // resetCart(e)
+      console.log(response)
+    })
 
   }
   return (
