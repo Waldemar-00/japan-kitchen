@@ -9,6 +9,7 @@ const FormDish = ({ className, dish }) => {
   const [disabled, setDisabled] = useState(false)
   const { addOrRemoveDish } = useContext(Context)
   const [placeholder, setPlaceholder] = useState('dose')
+  // const [bump, setBump] = useState(false)
   useEffect(() => {
     localStorage.setItem(dish.id, value)
     const item = localStorage.getItem(dish.id)
@@ -17,6 +18,11 @@ const FormDish = ({ className, dish }) => {
         setPlaceholder('dose')
       }, 5000)
     }
+    // function timeBump() {
+      // setTimeout(() => {
+        // setBump(false)
+      // }, 1000)
+    // }
     if (item) {
       setValue(item)
     }
@@ -28,6 +34,7 @@ const FormDish = ({ className, dish }) => {
     }
     return () => {
       clearTimeout(setTime)
+      // clearTimeout(timeBump)
     }
   }, [value, dish.id, placeholder])
   function changeValue(e) {
@@ -56,6 +63,10 @@ const FormDish = ({ className, dish }) => {
             setPlaceholder('okey')
             localStorage.removeItem(`${dish.id} value`)
           }
+          // if (!bump) {
+            // document.querySelector('button').classList.add('bump')
+            // setBump(true)
+          // }
         }}
       >
         to cart

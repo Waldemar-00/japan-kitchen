@@ -34,6 +34,7 @@
   font-size: 1.1rem;
   font-style: italic;
   transform: skewX(9deg);
+  animation: bump 300ms ease-in-out;
 }
 .btn {
   cursor: pointer;
@@ -60,4 +61,24 @@
   width: 70%;
   height: 100%;
   transform: rotate(-7deg) translateX(1rem);
+}
+.bump {
+  animation: bump 300ms ease-in-out;
+}
+@keyframes bump {
+  0% {
+    transform: scale(1)
+  }
+  10% {
+    transform: scale(0.9)
+  }
+  30% {
+    transform: scale(1.1)
+  }
+  50% {
+    transform: scale(1.15)
+  }
+  100% {
+    transform: scale(1)
+  }
 }
