@@ -12,6 +12,7 @@ function Cart() {
   const [reset, setReset] = useState(false)
   const [reFresh, setreFresh] = useState({})
   const [success, setSuccess] = useState(false)
+  const [componentSuccesText, setComponentSuccesText] = useState('')
   let totalPrice = 0
   let allNumDish = localStorage.getItem('numDish')
   useEffect(() => {
@@ -59,9 +60,18 @@ function Cart() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify(order)
-    }).then(response => response.json()).then(response => {
-      console.log(response)
-      if (response.order.length > 0) setSuccess(true)
+    }).then(response => {
+      if (response.ok) return response.json()
+      else return {error: 'Somthing wrong'}
+    }).then(response => {
+      if (response.error) {
+        setComponentSuccesText(response.error) 
+        setSuccess(true)
+      }
+      else {
+        setComponentSuccesText('Submited successly') 
+        setSuccess(true)
+      }
     })
 
   }
@@ -118,7 +128,7 @@ function Cart() {
         <Button
           type='button' className={styles.reset} foo={(e) => resetCart(e)}>reset cart</Button>
       </div> 
-      {success ? <Success className={styles.success}>Submited Succesly</Success> : null}
+      {success ? <Success className={styles.success}>{componentSuccesText}</Success> : null}
     </Substrate>
   )
 }
