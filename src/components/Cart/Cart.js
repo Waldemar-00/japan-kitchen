@@ -7,7 +7,7 @@ import { Context } from '../../store/Context'
 import { useContext, useState, useEffect } from 'react'
 import Substrate from './Substrate'
 function Cart() {
-  const { changeVisibleCart, allDish, resetAll } = useContext(Context)
+  const { changeVisibleCart, allDish, resetAll, deleteDishThere } = useContext(Context)
   const dataDish = allDish.length > 0 ? [...allDish] : (JSON.parse(localStorage.getItem('allDish')) || [])
   const [reset, setReset] = useState(false)
   const [reFresh, setreFresh] = useState({})
@@ -43,6 +43,18 @@ function Cart() {
     setReset(true)
     resetAll(reFresh, 'RESET', 0)
   }
+  function deleteDishHere(finalyPrice, dish) {
+    allNumDish = localStorage.getItem('numDish') - dish.dishNumber
+    localStorage.setItem('numDish', allNumDish)
+    deleteDishThere(dish, 'REMOVE', 0)
+    totalPrice = totalPrice - finalyPrice
+    localStorage.setItem('totalPrice', totalPrice)
+    const array = JSON.parse(localStorage.getItem('allDish')).filter(obj => obj.name !== dish.name)
+    if (array.length === 0) localStorage.clear()
+    localStorage.setItem('allDish', JSON.stringify(array))
+    setreFresh({})
+  }
+
   function dataSubmit(e) {
     e.preventDefault()
     let textarea = document.querySelector('textarea').value
@@ -83,7 +95,7 @@ function Cart() {
         <ul>
           {
             !reset && JSON.parse(localStorage.getItem('allDish')) ?
-            JSON.parse(localStorage.getItem('allDish')).map(dish => {
+            JSON.parse(localStorage.getItem('allDish')).map((dish, index )=> {
               if (!localStorage.getItem(`${dish.id} value`))localStorage.setItem(`${dish.id} value`, dish.dishNumber)
               let num = localStorage.getItem(`${dish.id} value`) || dish.dishNumber
               totalPrice = +totalPrice + dish.price * localStorage.getItem(`${dish.id} value`)
@@ -103,7 +115,8 @@ function Cart() {
                     placeholder={num}
                     foo={(e) => changeLocalStorageValues(e)}
                   />
-                  <div className={styles.finalyPrice}>{ finalyPrice }</div>
+                  <div className={styles.finalyPrice}>{finalyPrice}</div>
+                  <Button className={styles.delete} foo={() => deleteDishHere(finalyPrice, dish)}>delete</Button>
               </li>
               )
             }) : null

@@ -6,7 +6,7 @@ function cartReducer(state, action) {
     case 'ADD':
       return caseAdd(state, action)
     case 'REMOVE':
-      return
+      return deleteDish(state, action)
     case 'RESET':
       return cartReset()
     default: return
@@ -48,6 +48,14 @@ function cartReset() {
     numberOfDish: 0
   }
 }
+function deleteDish(state, action) {
+  const array = state.dishes.filter(obj => obj.name !== action.dish.name)
+  return {
+    dishes: array,
+    totalPrice: +localStorage.getItem('totalPrice'),
+    numberOfDish: +localStorage.getItem('numDish')
+  }
+}
 function ContextProvider({ children }) {
   const [isVisibleCart, setisVisibleCart] = useState(false)
   const [lastState, cartDispatch] = useReducer(cartReducer, { dishes: [], totalPrice: 0, numberOfDish: 0 })
@@ -70,6 +78,15 @@ function ContextProvider({ children }) {
       }
     )
   }
+  function deleteDishThere(dish, addOrRemove, numberOfDish) {
+    cartDispatch(
+      {
+        type: addOrRemove,
+        dish: dish,
+        number: numberOfDish
+      }
+    )
+  }
   return (
     <Context.Provider value={{
       isVisibleCart,
@@ -78,7 +95,8 @@ function ContextProvider({ children }) {
       allDish: lastState.dishes,
       total: lastState.totalPrice.toFixed(2),
       numberOfDish: lastState.numberOfDish,
-      resetAll
+      resetAll,
+      deleteDishThere
     }}>
       {children}
     </Context.Provider>
