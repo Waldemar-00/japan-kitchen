@@ -2,16 +2,25 @@ import styles from './Cart.module.css'
 import { v4 } from 'uuid'
 import Button from '../UI/Button'
 import Input from '../UI/Input'
+import Success from '../UI/Success'
 import { Context } from '../../store/Context'
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import Substrate from './Substrate'
 function Cart() {
   const { changeVisibleCart, allDish, resetAll } = useContext(Context)
   const dataDish = allDish.length > 0 ? [...allDish] : (JSON.parse(localStorage.getItem('allDish')) || [])
   const [reset, setReset] = useState(false)
   const [reFresh, setreFresh] = useState({})
+  const [success, setSuccess] = useState(false)
   let totalPrice = 0
   let allNumDish = localStorage.getItem('numDish')
+  useEffect(() => {
+    function setTime() { setTimeout(() => setSuccess(false), 3000) }
+    if (success) setTime()
+    return () => {
+      clearTimeout(setTime)
+    };
+  }, [success]);
   function changeLocalStorageValues(e) {
     const prevValue = localStorage.getItem(e.target.name)
     localStorage.setItem(e.target.name, e.target.value)
@@ -36,28 +45,29 @@ function Cart() {
   function dataSubmit(e) {
     e.preventDefault()
     let textarea = document.querySelector('textarea').value
-    const finData = dataDish.map((dish) => {
+    const order = {}
+    order.order = dataDish.map((dish) => {
       dish.dishNumber = localStorage.getItem(`${dish.name} value`)
       dish.finalyPrice = localStorage.getItem(`${dish.name} finalyPrice`)
       delete dish.description
       delete dish.id
       return  dish
     })
-    finData.push({ totalPrice: totalPrice, textarea: textarea })
-    console.log(finData)
+    order.order.push({ totalPrice: totalPrice, textarea: textarea })
+    console.log(order)
     fetch('https://jsonplaceholder.typicode.com/posts', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
-      body: JSON.stringify(finData)
+      body: JSON.stringify(order)
     }).then(response => response.json()).then(response => {
-      // resetCart(e)
       console.log(response)
+      if (response.order.length > 0) setSuccess(true)
     })
 
   }
   return (
     <Substrate>
-      <div className={styles.cart}>
+        <div className={styles.cart}>
         <h2>Your products in CART</h2>
         <Button type='button' className={styles.close} foo={changeVisibleCart}>close cart</Button>
         <ul>
@@ -108,6 +118,7 @@ function Cart() {
         <Button
           type='button' className={styles.reset} foo={(e) => resetCart(e)}>reset cart</Button>
       </div> 
+      {success ? <Success className={styles.success}>Submited Succesly</Success> : null}
     </Substrate>
   )
 }
