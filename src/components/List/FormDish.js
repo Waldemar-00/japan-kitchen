@@ -12,11 +12,22 @@ const FormDish = ({ className, dish }) => {
   useEffect(() => {
     localStorage.setItem(dish.id, value)
     const item = localStorage.getItem(dish.id)
+    function setTime() {
+      setTimeout(() => {
+        setPlaceholder('dose')
+      }, 5000)
+    }
     if (item) {
       setValue(item)
     }
     if (placeholder === 'okey' || placeholder === 'dose') {
       setDisabled(true)
+    }
+    if (placeholder === 'okey') {
+      setTime()
+    }
+    return () => {
+      clearTimeout(setTime)
     }
   }, [value, dish.id, placeholder])
   function changeValue(e) {
