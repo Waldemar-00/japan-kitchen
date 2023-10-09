@@ -16,7 +16,11 @@ function Cart() {
   let totalPrice = 0
   let allNumDish = localStorage.getItem('numDish')
   useEffect(() => {
-    function setTime() { setTimeout(() => setSuccess(false), 3000) }
+    function setTime() {
+      setTimeout(() => {
+        setSuccess(false)
+      }, 3000)
+    }
     if (success) setTime()
     return () => {
       clearTimeout(setTime)
@@ -73,7 +77,10 @@ function Cart() {
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify(order)
     }).then(response => {
-      if (response.ok) return response.json()
+      if (response.ok) {
+        resetCart(e)
+        return response.json()
+      }
       else return {error: 'Somthing wrong'}
     }).then(response => {
       if (response.error) {
@@ -85,7 +92,6 @@ function Cart() {
         setSuccess(true)
       }
     })
-
   }
   return (
     <Substrate>
@@ -135,11 +141,16 @@ function Cart() {
           <textarea name="textarea" id="textarea"></textarea>
               <Button type="submit"
                 foo={(e) => dataSubmit(e)}
-              >order</Button>
+              >
+                order
+              </Button>
           </form> : null
         }
         <Button
-          type='button' className={styles.reset} foo={(e) => resetCart(e)}>reset cart</Button>
+          type='button' className={styles.reset} foo={(e) => resetCart(e)}
+        >
+          reset cart
+        </Button>
       </div> 
       {success ? <Success className={styles.success}>{componentSuccesText}</Success> : null}
     </Substrate>
