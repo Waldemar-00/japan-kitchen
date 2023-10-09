@@ -18,17 +18,22 @@ const FormDish = ({ className, dish }) => {
         setPlaceholder('dose')
       }, 4000)
     }
+    function inputTimer() {
+      setTimeout(() => setClassNameInput(`${styles.inputDish}`), 500)
+    }
     if (item) {
       setValue(item)
     }
     if (placeholder === 'okey' || placeholder === 'dose') {
       setDisabled(true)
+      inputTimer()
     }
     if (placeholder === 'okey') {
       setTime()
     }
     return () => {
       clearTimeout(setTime)
+      clearTimeout(inputTimer)
     }
   }, [value, dish.id, placeholder])
   function changeValue(e) {
@@ -51,7 +56,6 @@ const FormDish = ({ className, dish }) => {
         disabled={disabled}
         foo={() => {
           setClassNameInput(`${styles.inputDish} ${styles.bump}`)
-          setTimeout(() => setClassNameInput(`${styles.inputDish}`), 1000)
           addOrRemoveDish(dish, 'ADD', value)
           const item = localStorage.getItem(dish.id)
           if (item) {
