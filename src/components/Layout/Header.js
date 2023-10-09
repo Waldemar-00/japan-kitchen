@@ -6,7 +6,7 @@ import { v4 } from 'uuid'
 import { useContext } from 'react'
 import { Context } from '../../store/Context'
 function Header() {
-  const { numberOfDish, changeVisibleCart } = useContext(Context)
+  const { changeVisibleCart } = useContext(Context)
   return (
     <>
       <header className={styles.header}>

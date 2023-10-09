@@ -95,7 +95,7 @@ function Cart() {
         <ul>
           {
             !reset && JSON.parse(localStorage.getItem('allDish')) ?
-            JSON.parse(localStorage.getItem('allDish')).map((dish, index )=> {
+            JSON.parse(localStorage.getItem('allDish')).map(dish => {
               if (!localStorage.getItem(`${dish.id} value`))localStorage.setItem(`${dish.id} value`, dish.dishNumber)
               let num = localStorage.getItem(`${dish.id} value`) || dish.dishNumber
               totalPrice = +totalPrice + dish.price * localStorage.getItem(`${dish.id} value`)

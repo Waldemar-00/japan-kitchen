@@ -7,22 +7,17 @@ import Input from '../UI/Input'
 const FormDish = ({ className, dish }) => {
   const [value, setValue] = useState(localStorage.getItem(dish.id))
   const [disabled, setDisabled] = useState(false)
-  const { addOrRemoveDish } = useContext(Context)
   const [placeholder, setPlaceholder] = useState('dose')
-  // const [bump, setBump] = useState(false)
+  const [classNameInput, setClassNameInput] = useState(`${styles.inputDish}`)
+  const { addOrRemoveDish } = useContext(Context)
   useEffect(() => {
     localStorage.setItem(dish.id, value)
     const item = localStorage.getItem(dish.id)
     function setTime() {
       setTimeout(() => {
         setPlaceholder('dose')
-      }, 5000)
+      }, 4000)
     }
-    // function timeBump() {
-      // setTimeout(() => {
-        // setBump(false)
-      // }, 1000)
-    // }
     if (item) {
       setValue(item)
     }
@@ -34,7 +29,6 @@ const FormDish = ({ className, dish }) => {
     }
     return () => {
       clearTimeout(setTime)
-      // clearTimeout(timeBump)
     }
   }, [value, dish.id, placeholder])
   function changeValue(e) {
@@ -44,7 +38,7 @@ const FormDish = ({ className, dish }) => {
   }
   return (
     <div className={className}>
-      <Input className={styles.inputDish}
+      <Input className={classNameInput}
         type='number'
         placeholder={placeholder}
         min='0'
@@ -56,6 +50,8 @@ const FormDish = ({ className, dish }) => {
         type='button'
         disabled={disabled}
         foo={() => {
+          setClassNameInput(`${styles.inputDish} ${styles.bump}`)
+          setTimeout(() => setClassNameInput(`${styles.inputDish}`), 1000)
           addOrRemoveDish(dish, 'ADD', value)
           const item = localStorage.getItem(dish.id)
           if (item) {
@@ -63,10 +59,6 @@ const FormDish = ({ className, dish }) => {
             setPlaceholder('okey')
             localStorage.removeItem(`${dish.id} value`)
           }
-          // if (!bump) {
-            // document.querySelector('button').classList.add('bump')
-            // setBump(true)
-          // }
         }}
       >
         to cart
