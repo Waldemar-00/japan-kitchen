@@ -3,6 +3,7 @@ import { v4 } from 'uuid'
 import Button from '../UI/Button'
 import Input from '../UI/Input'
 import Success from '../UI/Success'
+import Answer from '../UI/Answer'
 import { Context } from '../../store/Context'
 import { useContext, useState, useEffect } from 'react'
 import Substrate from './Substrate'
@@ -12,6 +13,7 @@ function Cart() {
   const [reset, setReset] = useState(false)
   const [reFresh, setreFresh] = useState({})
   const [success, setSuccess] = useState(false)
+  const [answer, setAnswer] = useState(false)
   const [componentSuccesText, setComponentSuccesText] = useState('')
   let totalPrice = 0
   let allNumDish = localStorage.getItem('numDish')
@@ -79,6 +81,7 @@ function Cart() {
     }).then(response => {
       if (response.ok) {
         resetCart(e)
+        setAnswer(true)
         return response.json()
       }
       else return {error: 'Somthing wrong'}
@@ -97,7 +100,10 @@ function Cart() {
     <Substrate>
         <div className={styles.cart}>
         <h2>Your products in CART</h2>
-        <Button type='button' className={styles.close} foo={changeVisibleCart}>close cart</Button>
+        <Button type='button' className={styles.close} foo={() => {
+          setAnswer(false)
+          changeVisibleCart()
+        }}>close cart</Button>
         <ul>
           {
             !reset && JSON.parse(localStorage.getItem('allDish')) ?
@@ -146,11 +152,17 @@ function Cart() {
               </Button>
           </form> : null
         }
-        <Button
+        {
+          totalPrice > 0 ?
+          <Button
           type='button' className={styles.reset} foo={(e) => resetCart(e)}
-        >
+          >
           reset cart
-        </Button>
+          </Button> : null
+        }
+        {
+          answer && <Answer className={styles.answer} />
+        }
       </div> 
       {success ? <Success className={styles.success}>{componentSuccesText}</Success> : null}
     </Substrate>

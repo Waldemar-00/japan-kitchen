@@ -162,3 +162,13 @@
   background-color: red;
   color: rgb(240, 240, 240);
 }
+.answer {
+  margin: 0 auto;
+  margin-top: 10rem;
+  font-size: 2.5rem;
+  background-color: rgb(255, 191, 124);
+  width: 70rem;
+  height: 3rem;
+  line-height: 3rem;
+  transform: skewX(-9deg);
+}
