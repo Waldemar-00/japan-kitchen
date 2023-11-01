@@ -73,8 +73,7 @@ function Cart() {
       return  dish
     })
     order.order.push({ totalPrice: totalPrice, textarea: textarea })
-    console.log(order)
-    fetch('https://jsonplaceholder.typicode.com/posts', {
+    fetch('https://post-joke-default-rtdb.firebaseio.com/products.json', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify(order)
