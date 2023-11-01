@@ -2,7 +2,7 @@ import styles from './Dishes.module.css'
 import DataDishes from '../../store/DataDishes'
 import FormDish from './FormDish'
 import Cart from '../Cart/Cart'
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Context } from '../../store/Context'
 function Dishes() {
   const data = DataDishes()
@@ -11,7 +11,8 @@ function Dishes() {
     <>
       <ul className={styles.listDishes}>
         {
-          data.map(dish => {
+          !data.isLoading ?
+          data.data.map(dish => {
             return (
               <li key={dish.id}>
                 <div><h3>{dish.name}</h3></div>
@@ -20,7 +21,12 @@ function Dishes() {
                 <FormDish className={styles.form} dish={dish} />
               </li>
             )
-          })
+          }) :
+              <li>
+                <div><h2>Please wait</h2></div>
+                <div><h2>for a response</h2></div>
+                <div><h2>from the server!</h2></div>
+              </li>
         }
       </ul>
       {isVisibleCart ? <Cart /> : null}

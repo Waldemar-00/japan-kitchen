@@ -142,7 +142,7 @@ function Cart() {
         {
           !reset && totalPrice > 0 ?
           <form action='https://jsonplaceholder.typicode.com/posts' target= '_blank' method='post' >
-          <label htmlFor="textarea">write your wishes</label>
+          <label htmlFor="textarea">write your wishes <br></br> and your phone number</label>
           <textarea name="textarea" id="textarea"></textarea>
               <Button type="submit"
                 foo={(e) => dataSubmit(e)}
