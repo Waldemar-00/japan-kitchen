@@ -73,7 +73,7 @@ function Cart() {
       return  dish
     })
     order.order.push({ totalPrice: totalPrice, textarea: textarea })
-    fetch('https://post-joke-default-rtdb.firebaseio.com/products.json', {
+    fetch('https://japan-food-a886f-default-rtdb.firebaseio.com/products.json', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
       body: JSON.stringify(order)
@@ -141,14 +141,23 @@ function Cart() {
         </ul>
         {
           !reset && totalPrice > 0 ?
-          <form action='https://jsonplaceholder.typicode.com/posts' target= '_blank' method='post' >
-          <label htmlFor="textarea">write your wishes <br></br> and your phone number</label>
-          <textarea name="textarea" id="textarea"></textarea>
-              <Button type="submit"
+            <form>
+              <div>
+                <label htmlFor="name">Name</label>
+                <input id="name" type="text" /> 
+              </div>
+              <div>
+                <label htmlFor="phone">Phone</label>
+                <input id="phone" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />   
+              </div>
+              <div></div>
+            <label htmlFor="textarea">write your wishes</label>
+            <textarea name="textarea" id="textarea"></textarea>
+            <Button type="submit"
                 foo={(e) => dataSubmit(e)}
               >
                 order
-              </Button>
+            </Button>
           </form> : null
         }
         {

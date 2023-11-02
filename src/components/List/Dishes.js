@@ -6,7 +6,6 @@ import { useContext } from 'react'
 import { Context } from '../../store/Context'
 function Dishes() {
   const data = DataDishes()
-  console.log(data.data)
   const { isVisibleCart } = useContext(Context)
   return (
     <>
