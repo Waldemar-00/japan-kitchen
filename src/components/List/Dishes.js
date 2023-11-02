@@ -6,6 +6,7 @@ import { useContext } from 'react'
 import { Context } from '../../store/Context'
 function Dishes() {
   const data = DataDishes()
+  console.log(data.data)
   const { isVisibleCart } = useContext(Context)
   return (
     <>
@@ -21,7 +22,12 @@ function Dishes() {
                 <FormDish className={styles.form} dish={dish} />
               </li>
             )
-          }) :
+          }) : data.errorFetch ?
+              <li>
+                <div><h2>Don't worry about this</h2></div>
+                <div><h2>there is</h2></div>
+                <div><h2>somthing wrong!</h2></div>
+              </li> :
               <li>
                 <div><h2>Please wait</h2></div>
                 <div><h2>for a response</h2></div>
