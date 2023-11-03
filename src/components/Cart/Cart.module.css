@@ -76,7 +76,7 @@
 
 .cart form {
   display: grid;
-  grid-template-columns: 10rem 40rem 10rem;
+  grid-template-columns: repeat(1, 50%);
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -86,6 +86,21 @@
 }
 .cart form label {
   font-size: 1.2rem;
+  vertical-align: top;
+}
+.cart form input {
+  resize: none;
+  outline: none;
+  border: none;
+  width: 20rem;
+  height: 2rem;
+  margin-left: 1rem;
+  font-size: 1.1rem;
+  color:#226093ff;
+  font-weight: bold;
+  font-style: italic;
+  background-color: #e5e7d8ff;
+  text-align: center;
 }
 .cart form textarea {
   resize: none;
@@ -96,9 +111,11 @@
   font-size: 1.1rem;
   font-weight: bold;
   font-style: italic;
-}
-.cart form textarea {
-  font-style: italic;
+  width: 20rem;
+  height: 4rem;
+  margin-left: 1rem;
+  background-color: #e5e7d8ff;
+  text-align: center;
 }
 .cart form button {
   background-color: rgb(255, 191, 124);
@@ -107,9 +124,11 @@
   font-style: italic;
   font-size: 1.1rem;
   border: none;
-  width: 11rem;
+  width: 20rem;
   height: 2rem;
   cursor: pointer;
+  margin-top: 2rem;
+  margin-left: 5rem;
 }
 .cart form button:hover {
   background-color:  #14481aff;

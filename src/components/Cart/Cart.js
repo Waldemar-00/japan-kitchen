@@ -63,7 +63,9 @@ function Cart() {
 
   function dataSubmit(e) {
     e.preventDefault()
-    let textarea = document.querySelector('textarea').value
+    const name = document.querySelector('#name').value
+    const phone = document.querySelector('#phone').value
+    const textarea = document.querySelector('textarea').value
     const order = {}
     order.order = dataDish.map((dish) => {
       dish.dishNumber = localStorage.getItem(`${dish.name} value`)
@@ -72,7 +74,7 @@ function Cart() {
       delete dish.id
       return  dish
     })
-    order.order.push({ totalPrice: totalPrice, textarea: textarea })
+    order.order.push({ totalPrice, textarea, name, phone })
     fetch('https://japan-food-a886f-default-rtdb.firebaseio.com/products.json', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json;charset=utf-8' },
@@ -148,16 +150,19 @@ function Cart() {
               </div>
               <div>
                 <label htmlFor="phone">Phone</label>
-                <input id="phone" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />   
+                <input id="phone" type="tel" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" required />   
               </div>
-              <div></div>
-            <label htmlFor="textarea">write your wishes</label>
-            <textarea name="textarea" id="textarea"></textarea>
-            <Button type="submit"
-                foo={(e) => dataSubmit(e)}
-              >
-                order
-            </Button>
+              <div>
+                <label htmlFor="textarea">Wishes</label>
+                <textarea name="textarea" id="textarea"></textarea>
+              </div>
+              <div>
+                <Button type="submit"
+                  foo={(e) => dataSubmit(e)}
+                >
+                  order
+                </Button>
+              </div>
           </form> : null
         }
         {
